@@ -10,7 +10,7 @@ namespace CRUDOperations
             bool end = true;
             while (end)
             {
-                Console.WriteLine("1.To Insert the Data in Data Base \n2.Retrieve All Employee Data from the Data Base\n3. Update Employee Salary");
+                Console.WriteLine("1.To Insert the Data in Data Base \n2.Retrieve All Employee Data from the Data Base\n3.Update Employee Salary\n4.Deleting the Recod from the EmployeeData base");
                 Console.WriteLine("\nEnter Option For Exicute The Program");
                 int option = Convert.ToInt32(Console.ReadLine());
                 switch (option)
@@ -38,11 +38,30 @@ namespace CRUDOperations
                         break;
                     case 3:
                         EmpModel model = new EmpModel();
-                        model.Id = 4;
+                        model.Id = 1;
                         model.Salary = 40000;
                         repository.UpdateEmployee(model);
                         break;
                     case 4:
+                        EmpModel emp = new EmpModel();
+
+                        List<EmpModel> eList = repository.GetAllEmployees();
+                        Console.WriteLine("Enter the Employee Id to Delete the Record  From the Table");
+                        int empId = Convert.ToInt32(Console.ReadLine());
+                        foreach (EmpModel data in eList)
+                        {
+                            if (data.Id == empId)
+                            {
+                                repository.DeleteEmployee(empId);
+                                Console.WriteLine("Record Successfully Deleted");
+                            }
+                            else
+                            {
+                                Console.WriteLine(empId + " Id is Not present in the Data base");
+                            }
+                        }
+                        break;
+                    case 5:
                         end = false;
                         break;
                     default:
