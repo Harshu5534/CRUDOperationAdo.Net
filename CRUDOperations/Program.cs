@@ -10,7 +10,7 @@ namespace CRUDOperations
             bool end = true;
             while (end)
             {
-                Console.WriteLine("1.To Insert the Data in Data Base \n");
+                Console.WriteLine("1.To Insert the Data in Data Base \n2.Retrieve All Employee Data from the Data Base\n");
                 Console.WriteLine("\nEnter Option For Exicute The Program");
                 int option = Convert.ToInt32(Console.ReadLine());
                 switch (option)
@@ -29,6 +29,13 @@ namespace CRUDOperations
                         empModel.Taxable_Pay = "600";
                         empModel.Net_Pay = "200";
                         repository.AddEmployee(empModel);
+                        break;
+                    case 2:
+                        List<EmpModel> empList = repository.GetAllEmployees();
+                        foreach (EmpModel data in empList)
+                        {
+                            Console.WriteLine(data.Id + " " + data.Name + " " + data.Gender + " " + data.Salary + " " + data.StartDate + " " + data.PhoneNumber + " " + data.Address + " " + data.Deduction + " " + data.Taxable_Pay + " " + data.Net_Pay );
+                        }
                         break;
                     case 3:
                         end = false;

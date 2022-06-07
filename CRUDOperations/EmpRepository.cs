@@ -56,6 +56,39 @@ namespace CRUDOperations
                 this.con.Close();
             }
         }
+        public List<EmpModel> GetAllEmployees()
+        {
+            connection();
+            List<EmpModel> EmpList = new List<EmpModel>();
+
+            SqlCommand com = new SqlCommand("GetEmployees", con);
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);
+            con.Close();
+            //Bind EmpModel generic list using dataRow     
+            foreach (DataRow dr in dt.Rows)
+            {
+                EmpList.Add(
+                new EmpModel
+                {
+                    Id = Convert.ToInt32(dr["Id"]),
+                    Name = Convert.ToString(dr["Name"]),
+                    Gender = Convert.ToString(dr["Gender"]),
+                    Salary = Convert.ToInt32(dr["Salary"]),
+                    StartDate = Convert.ToDateTime(dr["StartDate"]),
+                    PhoneNumber = Convert.ToString(dr["PhoneNumber"]),
+                    Address = Convert.ToString(dr["Address"]),
+                    Deduction = Convert.ToString(dr["Deduction"]),
+                    Taxable_Pay = Convert.ToString(dr["Taxable_Pay"]),
+                    Net_Pay = Convert.ToString(dr["Net_Pay"]),
+                }
+                );
+            }
+            return EmpList;
+        }
     }
 }
     
