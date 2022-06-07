@@ -31,7 +31,6 @@ namespace CRUDOperations
                 com.Parameters.AddWithValue("@StartDate", obj.StartDate);
                 com.Parameters.AddWithValue("@PhoneNumber", obj.PhoneNumber);
                 com.Parameters.AddWithValue("@Address", obj.Address);
-                com.Parameters.AddWithValue("@DepartMent", obj.DepartMent);
                 com.Parameters.AddWithValue("@Deduction", obj.Deduction);
                 com.Parameters.AddWithValue("@Taxable_Pay", obj.Taxable_Pay);
                 com.Parameters.AddWithValue("@Net_Pay", obj.Net_Pay);
@@ -88,6 +87,35 @@ namespace CRUDOperations
                 );
             }
             return EmpList;
+        }
+        //To Update Employee details    
+        public bool UpdateEmployee(EmpModel obj)
+        {
+            connection();
+            SqlCommand com = new SqlCommand("UpdateEmpDetails", con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Id", obj.Id);
+            com.Parameters.AddWithValue("@Name", obj.Name);
+            com.Parameters.AddWithValue("@Gender", obj.Gender);
+            com.Parameters.AddWithValue("@Salary", obj.Salary);
+            com.Parameters.AddWithValue("@StartDate", obj.StartDate);
+            com.Parameters.AddWithValue("@PhoneNumber", obj.PhoneNumber);
+            com.Parameters.AddWithValue("@Address", obj.Address);
+            com.Parameters.AddWithValue("@Deduction", obj.Deduction);
+            com.Parameters.AddWithValue("@Taxable_Pay", obj.Taxable_Pay);
+            com.Parameters.AddWithValue("@Net_Pay", obj.Net_Pay);
+            con.Open();
+            int i = com.ExecuteNonQuery();
+            con.Close();
+            if (i >= 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }

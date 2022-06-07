@@ -10,7 +10,7 @@ namespace CRUDOperations
             bool end = true;
             while (end)
             {
-                Console.WriteLine("1.To Insert the Data in Data Base \n2.Retrieve All Employee Data from the Data Base\n");
+                Console.WriteLine("1.To Insert the Data in Data Base \n2.Retrieve All Employee Data from the Data Base\n3. Update Employee Salary");
                 Console.WriteLine("\nEnter Option For Exicute The Program");
                 int option = Convert.ToInt32(Console.ReadLine());
                 switch (option)
@@ -24,7 +24,6 @@ namespace CRUDOperations
                         empModel.StartDate = DateTime.Now;
                         empModel.PhoneNumber = "9687569089";
                         empModel.Address = "Pune";
-                        empModel.DepartMent = "Civil";
                         empModel.Deduction = "500";
                         empModel.Taxable_Pay = "600";
                         empModel.Net_Pay = "200";
@@ -38,6 +37,12 @@ namespace CRUDOperations
                         }
                         break;
                     case 3:
+                        EmpModel model = new EmpModel();
+                        model.Id = 4;
+                        model.Salary = 40000;
+                        repository.UpdateEmployee(model);
+                        break;
+                    case 4:
                         end = false;
                         break;
                     default:
